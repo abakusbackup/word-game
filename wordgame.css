@@ -1,0 +1,14 @@
+h1{
+  width: 100%;
+  margin: 15% 0 0 0 !important;
+  font-size: 200px !important;
+  text-align:center;
+}
+.nav{
+  max-width: 500px;
+  margin: 0 auto !important;
+  float:none !important;
+}
+.nav li .btn{
+  margin: 20px;
+}

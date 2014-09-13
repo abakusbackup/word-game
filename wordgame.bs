@@ -1,0 +1,35 @@
+String.prototype.capitalize = () ->
+  return @charAt(0).toUpperCase() + @slice(1)
+
+words = ['dumbledore']
+
+newWord = () ->
+    n = Math.floor(Math.random() * words.length)
+    word = words[n]
+    words.splice(n, 1)
+    if word != undefined
+      Session.set("word", word.capitalize())
+    else
+      Session.set("word", "")
+
+getScore = () ->
+    return Session.get("score")
+
+getWord = () ->
+    return Session.get("word")
+
+if Meteor.isClient
+  console.log('#{words.length} words')
+  Session.set("score", 0)
+  newWord()
+  Template.viewWord.word = getWord
+  Template.scoreBoard.score = getScore
+  Template.scoreBoard.events({
+    'click .next-btn': () ->
+      Session.set("score", Session.get("score") + 3)
+      newWord()
+
+    'click .skip-btn': () ->
+      Session.set("score", Session.get("score") - 1)
+      newWord()
+  })
